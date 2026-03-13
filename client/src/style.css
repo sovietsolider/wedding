@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+
+/*
+  Шрифт MV-SKIFER: положи файл в client/public/fonts/MV-SKIFER.otf
+  (создай папку public/fonts, если её нет)
+*/
+@font-face {
+  font-family: 'MV Skifer';
+  src: url('/fonts/MV-SKIFER.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nauraz Red';
+  src: url('/fonts/NAURYZREDKEDS.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gropled';
+  src: url('/fonts/Gropled-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Midflite';
+  src: url('/fonts/midflite-c.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Сканировать классы в компонентах Vue */
+@source "./**/*.vue";
+
+@theme {
+  /* Свой шрифт: в разметке class="font-skifer" */
+  --font-skifer: 'MV Skifer', serif;
+  /* Шрифт Nauraz Red: в разметке class="font-nauraz" */
+  --font-nauraz: 'Nauraz Red', serif;
+  /* Шрифт Gropled Bold: в разметке class="font-gropled" */
+  --font-gropled: 'Gropled', serif;
+  /* Шрифт Midflite: в разметке class="font-midflite" */
+  --font-midflite: 'Midflite', serif;
+  --color-primary: #810510;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @apply antialiased bg-primary text-white font-nauraz;
+}
+
+#app {
+}
