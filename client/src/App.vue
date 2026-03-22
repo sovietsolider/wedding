@@ -107,7 +107,7 @@ async function submitRsvp(withPartner = false) {
     if (!res.ok) throw new Error('Ошибка отправки')
     sent.value = true
   } catch (e) {
-    error.value = e.message || 'Не удалось отправить, попробуйте позже.'
+    error.value = e.message || 'Не удалось отправить. Попробуйте позже.'
   } finally {
     loading.value = false
   }
