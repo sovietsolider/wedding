@@ -58,6 +58,7 @@ function enableSoundAndPlayMusic() {
 }
 
 const userName = ref('')
+const userHandle = ref('')
 const loading = ref(false)
 const sent = ref(false)
 const error = ref('')
@@ -82,6 +83,7 @@ onMounted(() => {
     if (user) {
       const parts = [user.first_name, user.last_name].filter(Boolean)
       userName.value = parts.join(' ') || user.username || 'Гость'
+      userHandle.value = user.username || ''
     }
   }
   if (!userName.value) {
@@ -95,7 +97,8 @@ async function submitRsvp(withPartner = false) {
   error.value = ''
   try {
     const partner = withPartner ? ' +1' : ''
-    const text = `✅ Придёт: ${userName.value}${partner}`
+    const handle = userHandle.value ? ` (@${userHandle.value})` : ''
+    const text = `✅ Придёт: ${userName.value}${handle}${partner}`
     const res = await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
