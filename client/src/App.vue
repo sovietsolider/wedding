@@ -4,7 +4,6 @@
   <Look />
   <Final />
 
-  <!-- Запрос про звук при первом открытии -->
   <Teleport to="body">
     <div
       v-if="soundEnabled === null"
@@ -36,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, provide } from 'vue'
+import { ref, onMounted, provide } from 'vue'
 import Hero from './components/Hero.vue'
 import Map from './components/Map.vue'
 import Look from './components/Look.vue'
@@ -51,7 +50,7 @@ let bgMusic: HTMLAudioElement | null = null
 function enableSoundAndPlayMusic() {
   setSoundEnabled(true)
   if (!bgMusic) {
-    bgMusic = new Audio('/mp3/gspd.mp3')
+    bgMusic = new Audio(import.meta.env.BASE_URL + 'mp3/gspd.mp3')
     bgMusic.volume = 0.1
     bgMusic.loop = true
   }
@@ -110,6 +109,8 @@ async function submitRsvp(withPartner = false) {
 </script>
 
 <style scoped>
+@reference "./style.css";
+
 .sound-prompt-overlay {
   position: fixed;
   inset: 0;
@@ -146,7 +147,7 @@ async function submitRsvp(withPartner = false) {
   cursor: pointer;
 }
 .sound-prompt-btn-yes {
-  background: #2481cc;
+  @apply bg-primary text-white;
   color: #fff;
 }
 .sound-prompt-btn-no {
