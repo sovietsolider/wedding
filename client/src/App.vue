@@ -62,7 +62,8 @@ const loading = ref(false)
 const sent = ref(false)
 const error = ref('')
 
-const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+const tgToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN
+const tgChatId = import.meta.env.VITE_TELEGRAM_CHAT_ID
 
 provide('rsvp', {
   userName,
@@ -93,10 +94,12 @@ async function submitRsvp(withPartner = false) {
   loading.value = true
   error.value = ''
   try {
-    const res = await fetch(`${apiBase}/api/rsvp`, {
+    const partner = withPartner ? ' +1' : ''
+    const text = `✅ Придёт: ${userName.value}${partner}`
+    const res = await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: userName.value, withPartner }),
+      body: JSON.stringify({ chat_id: tgChatId, text }),
     })
     if (!res.ok) throw new Error('Ошибка отправки')
     sent.value = true
